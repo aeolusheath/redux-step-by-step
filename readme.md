@@ -65,3 +65,25 @@ redux-saga 一个redux中间件，接收自己的action【并不会让action变�
 
 ## react-redux
 不是中间件，相当于帮我们简化了一些操作，如果没有react-redux。我们必须手动的`store.getState()` 去获取 然后 `store.subscibe(changeFunc)`
+
+
+
+---
+
+总结
+
+1，redux dispatch传入一个action对象
+
+store.dispatch( action ) -> reducer
+
+2，Redux-thunk中间件传入一个函数【返回一个函数】，好处在那里，这个返回的函数可以是异步的，异步函数，异步函数会接收到store传递给它的dispatch对象，等异步流程结束，然后dispatch 去修改store里面的数据。
+
+store.dispatch(()=> {
+    return (dispatch) => {
+       dispach(action)  -> reducer
+    }
+})
+
+
+
+3，Redux-saga 中间件还是传入一个action对象，只不过这个对象。 我们可以定义到saga里面， dispatch的action对象，我们中间的 saga可以接收，然后接收到处理之后然后再dispatch到store里面。
